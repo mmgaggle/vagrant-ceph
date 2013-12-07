@@ -1,0 +1,22 @@
+{
+  "normal": {
+    "ceph": {
+      "osd_devices": [
+        {
+          "device": "/dev/sdb",
+          "dmcrypt": false
+        }
+      ]
+    },
+    "tags": [
+
+    ]
+  },
+  "name": "cephstore1000",
+  "chef_environment": "cluster",
+  "run_list": [
+    "recipe[ceph::repo]",
+    "recipe[ceph::conf]",
+    "recipe[ceph::osd]"
+  ]
+}

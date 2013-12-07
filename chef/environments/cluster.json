@@ -1,0 +1,29 @@
+{
+  "override_attributes": {
+  },
+  "default_attributes": {
+    "ceph": {
+      "version": "0.67.4-1precise",
+      "debian": {
+        "dumpling": {
+          "repository": "http://ceph.com/debian-dumpling/",
+          "repository_key": "https://ceph.com/git/?p=ceph.git;a=blob_plain;f=keys/release.asc"
+        }
+      },
+      "branch": "dumpling",
+      "config": {
+        "fsid": "cf376172-55ef-410b-a1ad-b84d9445aaf1",
+        "mon_initial_members": "cephmon",
+        "global": {
+          "public network": "192.168.3.0/24"
+        }
+      } 
+    }
+  },
+  "chef_type": "environment",
+  "json_class": "Chef::Environment",
+  "name": "cluster",
+  "cookbook_versions": {
+  },
+  "description": "A Test Ceph Cluster"
+}
