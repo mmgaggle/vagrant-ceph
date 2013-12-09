@@ -9,6 +9,10 @@ Vagrant docs:
 
 http://docs-v1.vagrantup.com/v1/docs/getting-started/index.html
 
+This Vagrantfile will initially launch a Open Source Chef server on Ubuntu
+Precise. The rest of the nodes in your cluster will register with the Chef
+server and use a set of Ceph cookbooks with a run\_list injected by Vagrant.
+
 Minimum Viable Cluster
 ======================
 
