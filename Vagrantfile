@@ -6,11 +6,9 @@
 Vagrant.configure('2') do |config|
 
   #TODO: check that the number of OSDs <= 154 until refactoring network bits
-  if true
-#Vagrant.has_plugin?('vagrant-aws')
+  if Vagrant.has_plugin?('vagrant-aws')
     puts 'INFO:  Vagrant-aws plugin detected.'
-    if true
-    #if include('ACCESS_KEY_ID') && include('SECRET_ACCESS_KEY')
+    if include('ACCESS_KEY_ID') && include('SECRET_ACCESS_KEY')
       puts "INFO:  AWS credentials detected, will launch cluster on EC2"
       use_aws = true
       def config_aws(instance,name,instance_type,ami,private_ip_address)
