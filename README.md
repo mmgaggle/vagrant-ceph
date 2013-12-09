@@ -2,10 +2,10 @@ Vagrant Ceph
 ============
 
 Vagrant Ceph is designed to allow developers to quickly spin up Ceph clusters.
-Currently clusters can be provisioned locally using Virtual Box or in any cloud
+Currently, clusters can be provisioned locally using Virtual Box or in any cloud
 that boasts EC2 API compatability. As a prerequisite you will need the minimum
-of Virtual Box and Vagrant installed, for instructions please visit the official
-Vagrant docs:
+of Virtual Box and Vagrant installed, for installation instructions please visit
+the official Vagrant docs:
 
 http://docs-v1.vagrantup.com/v1/docs/getting-started/index.html
 
