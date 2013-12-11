@@ -37,15 +37,27 @@ VAGRANT_CEPH_RGW
 VAGRANT_CEPH_KRBD
 ```
 
-```VAGRANT_CEPH_NUM_OSDS``` can be set to any integer between 1 and 150, representing
-the number of OSDs you desire in your cluster.
+```VAGRANT_CEPH_NUM_OSDS``` can be set to any integer between 1 and 150,
+representing the number of OSDs you desire in your cluster.
 
 Remote Cluster on Amazon EC2
 ============================
 
-TODO: Add instructions for launching cluster on Amazon.
+TODO: Add instructions for launching cluster on Amazon. This work is currently
+work in progress.
 
 Remote Cluster on OpenStack
 ===========================
 
 TODO: Add instructions for launching cluster on OpenStack.
+
+Known Issues
+============
+
+If the chef server node is not able to index the results of the cephmon node.save
+operation before cephstore nodes search for the OSD bootstrap key then the OSD
+recipe will skip preperation of storage devices until such a search can be
+satisfied. You can manually trigger convergence by using ```vagrant ssh cephstore####```
+and executing:
+
+```sudo chef-client -c /vagrant/chef/client.rb```

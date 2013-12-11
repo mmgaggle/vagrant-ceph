@@ -5,18 +5,20 @@
 
 Vagrant.configure('2') do |config|
 
+  use_aws = false
   #TODO: check that the number of OSDs <= 154 until refactoring network bits
-  if Vagrant.has_plugin?('vagrant-aws')
+  if Vagrant.has_plugin?('AWS')
     puts 'INFO:  Vagrant-aws plugin detected.'
-    if include('ACCESS_KEY_ID') && include('SECRET_ACCESS_KEY')
+    if !ENV['ACCESS_KEY_ID'].nil? && !ENV['SECRET_ACCESS_KEY'].nil?
       puts "INFO:  AWS credentials detected, will launch cluster on EC2"
       use_aws = true
       def config_aws(instance,name,instance_type,ami,private_ip_address)
+        instance.vm.box = 'aws-box-url'
         instance.vm.provider :aws do |aws, override|
           aws.access_key_id = ENV['ACCESS_KEY_ID']
           aws.secret_access_key = ENV['SECRET_ACCESS_KEY']
           aws.keypair_name = "vagrant"
-          aws.ami = ami
+          #aws.ami = ami
           aws.instance_type = instance_type
           aws.region = "us-east-1"
           #aws.availability_zone = ""
@@ -128,7 +130,7 @@ Vagrant.configure('2') do |config|
     cephstore_name = "cephstore100#{i}"
     config.vm.define "cephstore100#{i}" do |cephstore|
       octect = 199 + num_osds
-      ip = '192.168.3.' << octect
+      ip = '192.168.3.' << octect.to_s
       cephstore_name = "cephstore100#{i}"
       cephstore.vm.hostname = "#{cephstore_name}"
       cephstore.ssh.username = 'vagrant'
