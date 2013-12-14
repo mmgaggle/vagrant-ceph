@@ -85,7 +85,7 @@ Vagrant.configure('2') do |config|
   (1..num_osds).each do |i|
     cephstore_name = "cephstore100#{i}"
     config.vm.define "cephstore100#{i}" do |cephstore|
-      octect = 199 + num_osds
+      octect = 199 + i
       ip = '192.168.3.' << octect.to_s
       cephstore_name = "cephstore100#{i}"
       cephstore.vm.hostname = "#{cephstore_name}"
