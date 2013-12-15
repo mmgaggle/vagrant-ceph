@@ -15,7 +15,7 @@
         "fsid": "cf376172-55ef-410b-a1ad-b84d9445aaf1",
         "mon_initial_members": "cephmon",
         "global": {
-          "public network": "192.168.3.0/24"
+          "public network": "192.168.0.0/24"
         }
       } 
     }

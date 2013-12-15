@@ -7,7 +7,7 @@
 log_level          :info
 log_location       STDOUT
 ssl_verify_mode    :verify_none
-chef_server_url    "https://192.168.3.100"
+chef_server_url    "https://192.168.0.168"
 
 validation_client_name "chef-validator"
 validation_key         "/vagrant/chef/validation.pem"

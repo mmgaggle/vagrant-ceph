@@ -22,7 +22,7 @@ Vagrant.configure('2') do |config|
     chefserver.ssh.username = 'vagrant'
     chefserver.vm.box = 'chefserver'
     chefserver.vm.box_url = 'https://objects.dreamhost.com/vagrant-ceph/chefserver-new.box'
-    chefserver.vm.network 'private_network', ip: '192.168.3.100'
+    chefserver.vm.network 'private_network', ip: '192.168.0.168'
     config.vm.provider :virtualbox do |vb|
       vb.name = 'chefserver'
       vb.customize ['modifyvm', :id, '--memory', '1024', '--cpus', '2']
@@ -38,13 +38,13 @@ Vagrant.configure('2') do |config|
     cephmon.ssh.username = 'vagrant'
     cephmon.vm.box = 'precise64chef'
     cephmon.vm.box_url = 'https://objects.dreamhost.com/vagrant-ceph/precise64chef.box'
-    cephmon.vm.network "private_network", ip: '192.168.3.101'
+    cephmon.vm.network "private_network", ip: '192.168.0.201'
     config.vm.provider :virtualbox do |vb|
       vb.name = 'cephmon'
       vb.customize ['modifyvm', :id, '--memory', '1024', '--cpus', '2']
     end
     cephmon.vm.provision :chef_client do |chef|
-      chef.chef_server_url = 'https://192.168.3.100'
+      chef.chef_server_url = 'https://192.168.0.168'
       chef_validation_client_name = 'chef-validator'
       chef.validation_key_path = 'chef/chef-validator.pem'
       chef.environment = 'cluster'
@@ -64,13 +64,13 @@ Vagrant.configure('2') do |config|
       cephmds.ssh.username = 'vagrant'
       cephmds.vm.box = 'precise64'
       cephmds.vm.box_url = 'https://objects.dreamhost.com/vagrant-ceph/precise64chef.box'
-      cephmds.vm.network 'private_network', ip: '192.168.3.103'
+      cephmds.vm.network 'private_network', ip: '192.168.0.202'
       config.vm.provider :virtualbox do |vb|
         vb.name = 'cephmds'
         vb.customize ['modifyvm', :id, '--memory', '1024', '--cpus', '2']
       end
       cephmds.vm.provision :chef_client do |chef|
-        chef.chef_server_url = 'https://192.168.3.100'
+        chef.chef_server_url = 'https://192.168.0.168'
         chef_validation_client_name = 'chef-validator'
         chef.validation_key_path = 'chef/chef-validator.pem'
         chef.environment = 'cluster'
@@ -85,8 +85,8 @@ Vagrant.configure('2') do |config|
   (1..num_osds).each do |i|
     cephstore_name = "cephstore100#{i}"
     config.vm.define "cephstore100#{i}" do |cephstore|
-      octect = 199 + i
-      ip = '192.168.3.' << octect.to_s
+      octect = 204 + i
+      ip = '192.168.0.' << octect.to_s
       cephstore_name = "cephstore100#{i}"
       cephstore.vm.hostname = "#{cephstore_name}"
       cephstore.ssh.username = 'vagrant'
@@ -101,7 +101,7 @@ Vagrant.configure('2') do |config|
         vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
       end
       cephstore.vm.provision :chef_client do |chef|
-        chef.chef_server_url = 'https://192.168.3.100'
+        chef.chef_server_url = 'https://192.168.0.168'
         chef_validation_client_name = 'chef-validator'
         chef.validation_key_path = 'chef/chef-validator.pem'
         chef.environment = 'cluster'
@@ -131,13 +131,13 @@ Vagrant.configure('2') do |config|
       cephrgw.ssh.username = 'vagrant'
       cephrgw.vm.box = 'precise64'
       cephrgw.vm.box_url = 'https://objects.dreamhost.com/vagrant-ceph/precise64chef.box'
-      cephrgw.vm.network 'private_network', ip: '192.168.3.120'
+      cephrgw.vm.network 'private_network', ip: '192.168.0.203'
       config.vm.provider :virtualbox do |vb|
         vb.name = 'cephrgw'
         vb.customize ['modifyvm', :id, '--memory', '1024']
       end
       cephrgw.vm.provision :chef_client do |chef|
-        chef.chef_server_url = 'https://192.168.3.100'
+        chef.chef_server_url = 'https://192.168.0.168'
         chef_validation_client_name = 'chef-validator'
         chef.validation_key_path = 'chef/chef-validator.pem'
         chef.environment = 'cluster'
@@ -157,13 +157,13 @@ Vagrant.configure('2') do |config|
       krbd.ssh.username = 'vagrant'
       krbd.vm.box = "precise64"
       krbd.vm.box_url = 'https://objects.dreamhost.com/vagrant-ceph/precise64chef.box'
-      krbd.vm.network 'private_network', ip: '192.168.3.130'
+      krbd.vm.network 'private_network', ip: '192.168.0.204'
       config.vm.provider :virtualbox do |vb|
         vb.name = 'krbd'
         vb.customize ['modifyvm', :id, '--memory', '2048', '--cpus', '2']
       end
       krbd.vm.provision :chef_client do |chef|
-        chef.chef_server_url = 'https://192.168.3.100'
+        chef.chef_server_url = 'https://192.168.0.168'
         chef_validation_client_name = 'chef-validator'
         chef.validation_key_path = 'chef/chef-validator.pem'
         chef.environment = 'cluster'
